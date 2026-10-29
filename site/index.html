@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11101b"><meta name="description" content="A MuseAI sign-in experience and a copyable OAuth + PKCE embed example.">
+  <title>Sign in with MuseAI</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+  <div class="ticker" aria-label="MuseAI sign-in preview"><div class="ticker-track" aria-hidden="true"><span>SIGN IN WITH MUSEAI • ONE IDENTITY • CLEAR CONSENT • PKCE BY DESIGN • SIGN IN WITH MUSEAI • ONE IDENTITY • CLEAR CONSENT • PKCE BY DESIGN • </span><span>SIGN IN WITH MUSEAI • ONE IDENTITY • CLEAR CONSENT • PKCE BY DESIGN • SIGN IN WITH MUSEAI • ONE IDENTITY • CLEAR CONSENT • PKCE BY DESIGN • </span></div></div>
+  <header class="site-header"><a class="brand" href="index.html"><span class="brand-mark"><img class="brand-symbol" src="assets/muse-symbol.svg" alt=""></span><span>Muse<span class="accent">AI</span></span></a><nav aria-label="Main navigation"><a href="login.html">Sign in</a><a href="embed-demo.html">Embed example</a><a href="about.html">About</a></nav></header>
+  <main>
+    <section class="hero"><div class="hero-copy"><p class="eyebrow">IDENTITY, NOT ANOTHER PASSWORD</p><h1>One button.<br><span class="gradient-text">Sign in with MuseAI.</span></h1><p class="lede">A clean sign-in example for sites that want to let people authenticate with MuseAI instead of collecting another email-and-password pair.</p><div class="actions"><a class="button primary" href="login.html">Explore MuseAI sign-in <span aria-hidden="true">↗</span></a><a class="button secondary" href="embed-demo.html">Get the embed example</a></div><p class="tiny-note">Prototype front end. The OAuth service is not live; this page does not create or verify accounts.</p></div><figure class="hero-art"><img src="assets/promo-museai.png" alt="A friendly purple AI muse juggling glowing idea bubbles"><figcaption>One less password to forget.</figcaption></figure></section>
+    <section class="section"><div class="section-heading"><p class="eyebrow">THE IDEA</p><h2>Sign in without building another password form.</h2><p class="lede">The planned flow sends visitors to MuseAI for approval, then back to the requesting site.</p></div><div class="card-grid">
+      <article class="promo-card"><img src="assets/promo-community.png" alt="Friendly characters gathered around a chat bubble"><div class="card-body"><p class="card-kicker">FOR PEOPLE</p><h3>Approve in MuseAI</h3><p>Review the requesting site and approve there. The identity is intended to come from the signed Muse session—not a name typed into a form.</p><a class="text-link" href="login.html">See the sign-in status →</a></div></article>
+      <article class="promo-card"><img src="assets/promo-coding.png" alt="A small robot working at a laptop"><div class="card-body"><p class="card-kicker">FOR BUILDERS</p><h3>Embed a button</h3><p>Start with an authorization-code + PKCE example and register an exact callback URL.</p><a class="text-link" href="embed-demo.html">Open embed example →</a></div></article>
+      <article class="promo-card"><img src="assets/promo-museai.png" alt="A purple AI muse juggling idea bubbles"><div class="card-body"><p class="card-kicker">HONEST STATUS</p><h3>Not live yet</h3><p>The OAuth Worker intentionally returns 503. The embed is a starting point, not a working login service.</p><a class="text-link" href="about.html">Read what is implemented →</a></div></article>
+    </div></section>
+    <section class="support-strip"><div><p class="eyebrow">TRY THE EXAMPLE</p><h2>Bring the button to your site.</h2><p>Copy the small embed snippet, then replace the example issuer, client ID, and callback after a real MuseAI OAuth service is deployed.</p></div><a class="button secondary" href="embed-demo.html">View copyable embed →</a></section>
+  </main>
+  <footer class="site-footer"><a class="brand" href="index.html"><span class="brand-mark small"><img class="brand-symbol" src="assets/muse-symbol.svg" alt=""></span><span>Muse<span class="accent">AI</span></span></a><div><a href="login.html">Sign in</a><a href="embed-demo.html">Embed example</a><a href="privacy.html">Privacy</a><a href="payments.html">Support</a></div><small>Built around a deliberate rule: never fake a successful login.</small></footer>
+</body></html>

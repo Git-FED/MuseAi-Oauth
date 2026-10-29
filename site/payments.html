@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11101b"><meta name="description" content="Age-gated support options for FedPromptly.">
+  <title>Payments & Support — Muse.world</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/site.css">
+  <style>
+    .payment-method{max-width:760px;margin:1.25rem auto;padding:1.5rem;border:1px solid #ffffff20;border-radius:1.25rem;background:linear-gradient(145deg,#ffffff0d,#ffffff05)}
+    .payment-method h2{margin:.1rem 0 .4rem}.payment-method p{color:var(--muted)}
+    .provider-slot{display:flex;justify-content:center;align-items:center;min-height:3rem;margin:1rem auto 0;flex-wrap:wrap;gap:.75rem}
+    .provider-slot iframe{max-width:100%}.payment-note{font-size:.86rem;color:#a9a2bb}
+    .age-gate-box{max-width:620px;margin:1rem auto 2rem;padding:1.5rem;border:1px solid #ff8dc766;border-radius:1.2rem;background:#351e3780}
+    .age-gate-box[hidden],#payment-options[hidden]{display:none}
+    .payment-button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.7rem 1.15rem;border:0;border-radius:.7rem;background:#28243a;color:white;font:700 1rem 'DM Sans',sans-serif;text-decoration:none;cursor:pointer}
+    .payment-button:hover{filter:brightness(1.14)}
+  </style>
+</head>
+<body>
+  <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>MAKE THINGS • BE NICE • STAY CURIOUS • SUPPORT THE PROJECT • </span><span>MAKE THINGS • BE NICE • STAY CURIOUS • SUPPORT THE PROJECT • </span></div></div>
+  <header class="site-header"><a class="brand" href="index.html"><span class="brand-mark"><img class="brand-symbol" src="assets/muse-symbol.svg" alt=""></span><span>Muse<span class="accent">AI</span></span></a><nav aria-label="Main navigation"><a href="communities.html">Communities</a><a href="discord.html">Discord</a><a href="payments.html" aria-current="page">Payments</a><a href="about.html">About</a></nav></header>
+  <main class="page-main">
+    <section class="page-heading"><p class="eyebrow">SUPPORT • FEDPROMPTLY</p><h1>Support the project.</h1><p>Payment options are shown only after the age acknowledgment below. Review each provider’s terms, recurring-payment details, and refund policy before confirming anything.</p></section>
+
+    <section class="age-gate-box" id="age-gate" aria-labelledby="age-title">
+      <h2 id="age-title">Age confirmation required</h2>
+      <p>Confirm that you are at least 18 years old and legally able to use the payment services in your location. This is an acknowledgment, not identity verification.</p>
+      <label class="age-check"><input type="checkbox" id="age-confirm"><span>I confirm I am 18 or older and wish to view the payment options.</span></label>
+      <div class="button-row"><button class="button primary" type="button" id="reveal-payments" disabled>Show payment options</button><a class="button secondary" href="index.html">Cancel</a></div>
+      <p class="payment-note">Provider widgets and payment images are not loaded until you confirm.</p>
+    </section>
+
+    <section id="payment-options" hidden aria-label="Payment and support options">
+      <div class="notice"><strong>Before you continue:</strong> PayPal and Stripe may create recurring subscriptions. Check the provider’s checkout screen for the amount, billing frequency, cancellation, and terms. This site does not collect card details.</div>
+
+      <article class="payment-method"><p class="eyebrow">RECURRING SUPPORT</p><h2>PayPal subscription</h2><p>FedPromptly · PayPal subscription plan. Confirm the plan and recurring terms on PayPal before approving.</p><div class="provider-slot" id="paypal-button-container-P-4FD24238VX4902214NK2XP2Y"></div><p class="payment-note" id="paypal-status" role="status" aria-live="polite"></p></article>
+
+      <article class="payment-method"><p class="eyebrow">ONE-TIME / CREATOR SUPPORT</p><h2>Ko-fi</h2><p>Open the Ko-fi support widget after the age gate.</p><div class="provider-slot"><button class="payment-button" type="button" id="open-kofi">Open Ko-fi support</button></div></article>
+
+      <article class="payment-method"><p class="eyebrow">COMMUNITY SUPPORT</p><h2>GitHub Sponsors</h2><p>Sponsor Git-FED through GitHub. The sponsor form is embedded below.</p><div class="provider-slot" id="github-sponsor-slot"></div></article>
+
+      <article class="payment-method"><p class="eyebrow">CREATOR SUPPORT</p><h2>Buy Me a Coffee</h2><p>Support FedPromptly through Buy Me a Coffee.</p><div class="provider-slot" id="bmc-slot"></div></article>
+
+      <article class="payment-method"><p class="eyebrow">CRYPTOCURRENCY</p><h2>NOWPayments</h2><p>Review the provider’s supported assets and fees before proceeding.</p><div class="provider-slot" id="nowpayments-slot"></div></article>
+
+      <article class="payment-method"><p class="eyebrow">CARD CHECKOUT</p><h2>Stripe</h2><p>Stripe’s hosted checkout will show the final price and any recurring terms before you confirm.</p><div class="provider-slot" id="stripe-slot"></div></article>
+      <div class="button-row"><a class="button secondary" href="support.html">Back to support page</a><a class="button secondary" href="privacy.html">Privacy information</a></div>
+    </section>
+  </main>
+  <footer class="site-footer"><a class="brand" href="index.html"><span class="brand-mark small"><img class="brand-symbol" src="assets/muse-symbol.svg" alt=""></span><span>Muse<span class="accent">AI</span></span></a><div><a href="privacy.html">Privacy</a><a href="payments.html">Payments</a><a href="discord.html">Discord</a></div><small>External payment providers operate under their own terms.</small></footer>
+
+  <script>
+    const ageCheck = document.getElementById('age-confirm');
+    const revealButton = document.getElementById('reveal-payments');
+    const gate = document.getElementById('age-gate');
+    const options = document.getElementById('payment-options');
+    let providersLoaded = false;
+
+    ageCheck.addEventListener('change', () => { revealButton.disabled = !ageCheck.checked; });
+    revealButton.addEventListener('click', async () => {
+      if (!ageCheck.checked) return;
+      gate.hidden = true;
+      options.hidden = false;
+      if (!providersLoaded) {
+        providersLoaded = true;
+        await loadProviders();
+      }
+    });
+
+    function loadScript(src, attrs = {}) {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = src;
+        for (const [key, value] of Object.entries(attrs)) script.setAttribute(key, value);
+        script.onload = resolve;
+        script.onerror = () => reject(new Error('Provider script failed to load'));
+        document.head.appendChild(script);
+      });
+    }
+
+    async function loadProviders() {
+      const paypalStatus = document.getElementById('paypal-status');
+      try {
+        await loadScript('https://www.paypal.com/sdk/js?client-id=BAA_ndqaWMyQwTnDZ0LXwLQ22jdJo9uxkeXYqmBbF-hD41HMiZ83mvOcx1Kti0b6ZfXfje7Q1ievNaS8Ok&vault=true&intent=subscription', {'data-sdk-integration-source':'button-factory'});
+        window.paypal.Buttons({
+          style: { shape: 'rect', color: 'gold', layout: 'vertical', label: 'subscribe' },
+          createSubscription: (data, actions) => actions.subscription.create({ plan_id: 'P-4FD24238VX4902214NK2XP2Y', quantity: 1 }),
+          onApprove: (data) => { paypalStatus.textContent = 'PayPal reports the subscription was approved. Subscription reference: ' + String(data.subscriptionID || 'received').slice(0, 8) + '…'; },
+          onError: () => { paypalStatus.textContent = 'PayPal could not load or complete this step. Please try again later.'; }
+        }).render('#paypal-button-container-P-4FD24238VX4902214NK2XP2Y');
+      } catch { paypalStatus.textContent = 'PayPal is temporarily unavailable. Try the provider page later.'; }
+
+      // Ko-fi's floating support widget is confined to this age-gated page.
+      document.getElementById('open-kofi').addEventListener('click', async () => {
+        try {
+          if (!window.kofiWidgetOverlay) await loadScript('https://storage.ko-fi.com/cdn/scripts/overlay-widget.js');
+          window.kofiWidgetOverlay.draw('fedpromptly', {
+            'type': 'floating-chat',
+            'floating-chat.donateButton.text': 'Support me',
+            'floating-chat.donateButton.background-color': '#00b9fe',
+            'floating-chat.donateButton.text-color': '#fff'
+          });
+        } catch { window.open('https://ko-fi.com/fedpromptly', '_blank', 'noopener,noreferrer'); }
+      }, { once: true });
+
+      const sponsor = document.createElement('iframe');
+      sponsor.src = 'https://github.com/sponsors/Git-FED/button'; sponsor.title = 'Sponsor Git-FED';
+      sponsor.width = '250'; sponsor.height = '35'; sponsor.loading = 'lazy'; sponsor.style.cssText = 'border:0;border-radius:6px';
+      document.getElementById('github-sponsor-slot').appendChild(sponsor);
+
+      const bmc = document.createElement('a'); bmc.href = 'https://www.buymeacoffee.com/fedpromptly';
+      bmc.target = '_blank'; bmc.rel = 'noopener noreferrer'; bmc.setAttribute('aria-label','Buy FedPromptly a book');
+      const bmcImage = document.createElement('img');
+      bmcImage.src = 'https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20book&emoji=%F0%9F%93%96&slug=fedpromptly&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff';
+      bmcImage.alt = 'Buy me a book'; bmcImage.loading = 'lazy'; bmcImage.style.cssText = 'max-width:100%;height:auto';
+      bmc.appendChild(bmcImage); document.getElementById('bmc-slot').appendChild(bmc);
+
+      const now = document.createElement('a'); now.href = 'https://nowpayments.io/payment/?iid=5997958570&source=button';
+      now.target = '_blank'; now.rel = 'noreferrer noopener'; now.setAttribute('aria-label','Pay using NOWPayments');
+      const nowImage = document.createElement('img'); nowImage.src = 'https://nowpayments.io/images/embeds/payments-button-white.svg';
+      nowImage.alt = 'Cryptocurrency & Bitcoin payment button by NOWPayments'; nowImage.loading = 'lazy';
+      now.appendChild(nowImage); document.getElementById('nowpayments-slot').appendChild(now);
+
+      const stripeScript = document.createElement('script'); stripeScript.async = true; stripeScript.src = 'https://js.stripe.com/v3/buy-button.js';
+      stripeScript.onload = () => {
+        const stripeButton = document.createElement('stripe-buy-button');
+        stripeButton.setAttribute('buy-button-id','buy_btn_1UJKaaJaRf233kfWKZ81fcIe');
+        stripeButton.setAttribute('publishable-key','pk_live_51UIdAGJaRf233kfWlFacR31IYVGdjCVAttNFzIgQGXQzrUdc894iJcBqamRZNwF11z2AN5kvjyzitor462f2egVI00UmKj0sd8');
+        document.getElementById('stripe-slot').appendChild(stripeButton);
+      };
+      stripeScript.onerror = () => { document.getElementById('stripe-slot').textContent = 'Stripe is temporarily unavailable.'; };
+      document.head.appendChild(stripeScript);
+    }
+  </script>
+</body>
+</html>
