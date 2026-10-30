@@ -11,7 +11,7 @@ Support authorization code with mandatory PKCE S256, device authorization, useri
 - Use a strongly consistent/atomic store (e.g. Durable Objects or transactional D1) for one-time authorization codes, device codes, pending approvals, and refresh rotation. KV alone is not sufficient for consume-once operations.
 - Resolve rotation semantics: daily `token_version` invalidation is a global logout, not signing-key rotation, and contradicts 30-day refresh tokens. Prefer a manual global kill switch plus independent signing-key rotation with overlap.
 - Either implement ID tokens, JWKS, nonce validation, and compliant discovery, or remove `openid` claims from discovery and call the service OAuth 2.0 only.
-- Email is unverified unless independently attested; omit it or explicitly return `email_verified: false`.
+- Email (option 2, decided 2026-10-30): collected on every sign-in, supplied via the Muse-signed approval, never a typed field. It is returned as `email` with `email_verified: false` until independently verified. Verification is a later, non-blocking step and never gates login.
 - Add rate limits, revocation, audit controls, security headers, cache controls, and tests before production.
 
 ## Non-goals
