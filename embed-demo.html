@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#11101b"><meta name="description" content="Copyable MuseAI OAuth sign-in button example using PKCE S256."><title>MuseAI Sign-In Embed Example</title><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/site.css"><style>.code-card{max-width:850px;margin:1.25rem auto;background:#0b0b12;border:1px solid #ffffff22;border-radius:1rem;overflow:hidden}.code-card pre{margin:0;padding:1.25rem;overflow:auto;color:#e7dcff;font: .84rem/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre}.code-toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem 1rem;background:#ffffff0a;border-bottom:1px solid #ffffff17}.code-toolbar span{color:var(--muted);font-size:.85rem}.status-box{max-width:760px;margin:1rem auto;padding:1rem 1.2rem;border:1px solid #f0b85b70;border-radius:.8rem;background:#4a351b55;color:#f5d8a0}.preview-box{max-width:760px;margin:1rem auto;padding:1.5rem;text-align:center;border:1px solid #ffffff22;border-radius:1.2rem;background:#ffffff08}</style></head>
+<body><div class="ticker" aria-hidden="true"><div class="ticker-track"><span>SIGN IN WITH MUSEAI • AUTHORIZATION CODE • PKCE S256 • </span><span>SIGN IN WITH MUSEAI • AUTHORIZATION CODE • PKCE S256 • </span></div></div>
+<header class="site-header"><a class="brand" href="index.html"><span class="brand-mark"><img class="brand-symbol" src="assets/muse-symbol.svg" alt=""></span><span>Muse<span class="accent">AI</span></span></a><nav aria-label="Main navigation"><a href="login.html">Sign in</a><a href="embed-demo.html" aria-current="page">Embed example</a><a href="about.html">About</a></nav></header>
+<main class="page-main"><section class="page-heading"><p class="eyebrow">FOR SITE BUILDERS</p><h1>Add a MuseAI sign-in button.</h1><p>This is a copyable client-side starting point for OAuth authorization code + PKCE S256. It is not a live sign-in integration: the Worker in this repository returns 503, and the issuer/client values below are placeholders.</p></section>
+<div class="status-box"><strong>Not connected:</strong> Replace `https://login.example.com` and `YOUR_CLIENT_ID` with a deployed MuseAI issuer and registered client. The callback must be registered as an exact redirect URI. The authorization server and signed Muse approval hook are not implemented here.</div>
+<section class="preview-box"><p class="eyebrow">BUTTON PREVIEW</p><p>The button below opens an honest local status page; it does not pretend to authenticate.</p><a class="button primary" href="signin-status.html">Sign in with MuseAI <span aria-hidden="true">↗</span></a></section>
+<section class="code-card" aria-label="Copyable embed code"><div class="code-toolbar"><span>HTML + module import</span><button class="button secondary" type="button" id="copy-code">Copy example</button></div><pre><code id="snippet">&lt;button id="museai-sign-in" type="button"&gt;Sign in with MuseAI&lt;/button&gt;
+
+&lt;script type="module"&gt;
+  import { startMuseLogin } from "/assets/museai-login.js";
+
+  document.querySelector("#museai-sign-in").addEventListener("click", () =&gt; {
+    startMuseLogin({
+      issuer: "https://login.example.com",
+      clientId: "YOUR_CLIENT_ID",
+      redirectUri: new URL("/auth/callback.html", location.origin).href,
+      scope: "openid profile"
+    }).catch((error) =&gt; {
+      console.error("MuseAI sign-in could not start:", error);
+    });
+  });
+&lt;/script&gt;</code></pre></section>
+<div class="content-card"><h2>What the example does</h2><p>It generates a random state, nonce, and PKCE verifier; computes the S256 challenge; stores the transaction values in session storage; and redirects to `/oauth/authorize`. A production callback must compare state and exchange the code securely. Do not put client secrets in browser code or claim a user is signed in until the server verifies the response.</p><p><strong>Current limitation:</strong> this repository has no functioning OAuth authorization endpoint, ID-token/JWKS support, or Muse-agent approval verifier. The example is for integration planning and will fail against the included Worker.</p><div class="button-row"><a class="button secondary" href="callback-example.html">Read callback guidance</a><a class="button secondary" href="login.html">Sign-in status</a><a class="button secondary" href="index.html">Home</a></div></div>
+<p class="tiny-note" id="copy-status" role="status" aria-live="polite"></p></main>
+<footer class="site-footer"><a class="brand" href="index.html"><span class="brand-mark small"><img class="brand-symbol" src="assets/muse-symbol.svg" alt=""></span><span>Muse<span class="accent">AI</span></span></a><div><a href="login.html">Sign in</a><a href="embed-demo.html">Embed example</a><a href="privacy.html">Privacy</a></div><small>No fake success screens. Not a live auth service.</small></footer>
+<script type="module">const b=document.querySelector('#copy-code'),c=document.querySelector('#snippet'),s=document.querySelector('#copy-status');b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(c.textContent);s.textContent='Example copied. Replace the issuer, client ID, callback, and callback handling before use.'}catch{s.textContent='Clipboard permission unavailable. Select and copy the code block manually.'}});</script></body></html>
