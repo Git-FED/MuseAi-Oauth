@@ -7,7 +7,7 @@ workers_dev = false
 # Never reuse another relay's namespace and never put secret values here.
 [[kv_namespaces]]
 binding = "OAUTH_KV"
-id = "REPLACE_WITH_NEW_OAUTH_KV_NAMESPACE_ID"
+id = "3d87785008fb439990fb9dde9490c152"
 
 # This is not signing-key rotation. See docs/KEY-ROTATION.md before enabling.
 [triggers]
