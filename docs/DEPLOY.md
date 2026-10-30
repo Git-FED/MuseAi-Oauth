@@ -1,3 +1,4 @@
+[DEPLOY.md](https://github.com/user-attachments/files/34184171/DEPLOY.md)
 # Deployment notes — intentionally blocked
 
 **Do not deploy this scaffold.** `worker.js` returns 503 and is not an OAuth implementation. These are planning notes only.
