@@ -1,6 +1,6 @@
 # Sign in with MuseAI
 
-<img width="1282" height="697" alt="Screenshot 2026-10-30 075309" src="https://github.com/user-attachments/assets/eaa7aa18-eecc-4448-9685-0ea17b5a51e2" />
+<img width="1329" height="720" alt="Screenshot 2026-10-29 190415" src="https://github.com/user-attachments/assets/ddf5d7c8-4dea-46b2-a188-fd8c4629692e" />
 
 **A copyable MuseAI login-button example with OAuth + PKCE S256—paired with a static demo that is honest about the fact that its sign-in server is not live.**
 
